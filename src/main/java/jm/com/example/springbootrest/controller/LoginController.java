@@ -21,6 +21,7 @@ public class LoginController {
     public LoginController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping
     public String index1(@ModelAttribute User user, Model model) {
         User admin = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
