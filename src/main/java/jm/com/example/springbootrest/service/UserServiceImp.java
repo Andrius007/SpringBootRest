@@ -12,10 +12,9 @@ import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
-    private final UserRepository userRepository;
+    private final    UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-
     @Autowired
     public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
