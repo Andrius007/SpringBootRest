@@ -8,10 +8,8 @@ import jm.com.example.springbootrest.model.Role;
 import jm.com.example.springbootrest.model.User;
 import jm.com.example.springbootrest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,24 +49,15 @@ public class AdminRestControllerV1 {
 
     @PostMapping(value = "")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
-        HttpHeaders headers = new HttpHeaders();
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
         this.userService.save(user);
-        return new ResponseEntity<>(user, headers, HttpStatus.CREATED);
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<User> updateUser(@RequestBody User user, UriComponentsBuilder builder) {
-        HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
 
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
         this.userService.save(user);
-
-        return new ResponseEntity<>(user, headers, HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping(value = "{id}")

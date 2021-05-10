@@ -22,14 +22,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    public void setUserDetailsService   (@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+    public void setUserDetailsService(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http .csrf().disable().authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/admin/").hasAnyRole("USER")
                 .antMatchers(HttpMethod.GET, "/admin/**").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
@@ -55,8 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
-
-
 
 
 }

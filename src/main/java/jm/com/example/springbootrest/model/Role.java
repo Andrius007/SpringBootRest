@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,10 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 
-
 @Data
 @Entity
-@Table(name= "roles")
+@Table(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -25,7 +23,7 @@ public class Role implements GrantedAuthority {
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
     public Role() {

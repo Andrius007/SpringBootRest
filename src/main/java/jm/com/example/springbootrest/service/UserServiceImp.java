@@ -30,6 +30,9 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void save(User user) {
+        if (user == null)  {
+            throw  new NullPointerException("User is no detected");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -42,6 +45,9 @@ public class UserServiceImp implements UserService {
     @Override
     public void update(long id, User updatedUser) {
         String oldPassword = userRepository.findById(updatedUser.getId()).orElse(null).getPassword();
+        if (updatedUser == null) {
+            throw  new NullPointerException("updatedUser is no detected");
+        }
         if (!oldPassword.equals(updatedUser.getPassword())) {
             updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         }
