@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @Service
 public class UserServiceImp implements UserService {
     private final    UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+
     @Autowired
     public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -62,5 +65,10 @@ public class UserServiceImp implements UserService {
     @Override
     public List<Role> getRoles() {
         return (List<Role>) roleRepository.findAll();
+    }
+
+    @Override
+    public User getUserByUserName(String name) {
+        return userRepository.findUserByUsername(name);
     }
 }
